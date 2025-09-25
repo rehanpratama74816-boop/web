@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a6cff 0%, #00fff7 100%) fixed;
+            color: #1a2233;
+            margin: 0;
+            padding: 0;
+            font-size: 1.08em;
+            line-height: 1.7;
+            letter-spacing: 0.2px;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* Efek partikel halus di background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.13;
+            z-index: 0;
+            pointer-events: none;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p, ul, ol, li {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #222;
+            font-size: 1.08em;
+            margin-bottom: 0.7em;
+            margin-top: 0.2em;
+            letter-spacing: 0.1px;
+            transition: color 0.2s;
+        }
+        ul, ol {
+            padding-left: 1.3em;
+        }
+        li {
+            margin-bottom: 0.3em;
+            border-left: 3px solid #00fff7;
+            padding-left: 0.7em;
+            background: linear-gradient(90deg, #f4f8fb 80%, #e6faff 100%);
+            border-radius: 4px;
+            box-shadow: 0 1px 4px #00fff711;
+        }
+        a {
+            color: #0a6cff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: #00b8d9;
+            text-decoration: underline;
+        }
+        ::selection {
+            background: #00fff7;
+            color: #0a6cff;
+        }
+        .nav-materi {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .nav-btn {
+            margin: 6px 8px;
+            padding: 13px 30px;
+            font-size: 1.08em;
+            font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+            background: linear-gradient(90deg, #0a6cff 30%, #00fff7 100%);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            letter-spacing: 1.5px;
+            box-shadow: 0 2px 12px #0a6cff22;
+            transition: background 0.3s, color 0.3s, transform 0.18s, box-shadow 0.3s;
+            text-shadow: 0 2px 8px #00fff799;
+            outline: none;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        .nav-btn.nav-h1 {
+            font-size: 1.18em;
+            background: linear-gradient(90deg, #0a6cff, #00fff7 80%);
+            border: 2.5px solid #0a6cff;
+        }
+        .nav-btn.nav-h2 {
+            font-size: 1.08em;
+            background: linear-gradient(90deg, #00fff7 10%, #0a6cff 90%);
+            border: 2px solid #00fff7;
+        }
+        .nav-btn.nav-h3 {
+            font-size: 0.98em;
+            background: linear-gradient(90deg, #0a6cff 60%, #00fff7 100%);
+            border: 2px dashed #0a6cff;
+        }
+        .nav-btn:hover, .nav-btn:focus {
+            background: linear-gradient(90deg, #00fff7 10%, #0a6cff 90%);
+            color: #0a6cff;
+            transform: translateY(-2px) scale(1.06);
+            box-shadow: 0 6px 24px #00fff799;
+            border-color: #00fff7;
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px #0a6cff11;
+            padding: 36px 28px 32px 28px;
+            position: relative;
+            z-index: 1;
+        }
+        .welcome-banner {
+            text-align: center;
+            margin-top: 32px;
+            margin-bottom: 18px;
+        }
+        .welcome-banner svg {
+            display: inline-block;
+        }
+        .welcome-banner div {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1.25em;
+            font-weight: 700;
+            color: #0a6cff;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 12px #00fff799;
+        }
+        .panda-corner {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 99;
+            animation: panda-float 2.8s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .panda-welcome-text {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1.08em;
+            font-weight: 700;
+            color: #0a6cff;
+            margin-bottom: 2px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 12px #00fff799;
+            background: rgba(255,255,255,0.85);
+            border-radius: 8px 8px 16px 16px;
+            padding: 6px 16px 4px 16px;
+            box-shadow: 0 2px 12px #00fff733;
+        }
+        @keyframes panda-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-materi">
+        <button class="nav-btn nav-h1" onclick="showInfoAndScroll('definisi')">Definisi QR Code</button>
+        <button class="nav-btn nav-h2" onclick="showInfoAndScroll('kegunaan')">Kegunaan QR Code</button>
+        <button class="nav-btn nav-h2" onclick="showInfoAndScroll('jenis')">Jenis-jenis QR Code</button>
+        <button class="nav-btn nav-h2" onclick="showInfoAndScroll('cara')">Cara Membuat QR Code</button>
+    </nav>
+    <div class="welcome-banner" style="text-align:center; margin-top:32px; margin-bottom:18px;">
+        <div style="font-family:'Montserrat',Arial,sans-serif;font-size:1.25em;font-weight:700;color:#0a6cff;margin-top:10px;letter-spacing:1px;text-shadow:0 2px 12px #00fff799;">
+            Selamat datang di proyek <span style="color:#00b8d9;">Rehan</span>
+        </div>
+    </div>
+    <div class="panda-corner">
+        <div class="panda-welcome-text">Selamat datang di proyek <span style="color:#00b8d9;">Rehan</span></div>
+        <!-- SVG Panda Imut -->
+        <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="45" cy="45" rx="40" ry="38" fill="#fff" stroke="#222" stroke-width="2"/>
+            <ellipse cx="28" cy="28" rx="10" ry="12" fill="#222"/>
+            <ellipse cx="62" cy="28" rx="10" ry="12" fill="#222"/>
+            <ellipse cx="45" cy="60" rx="22" ry="18" fill="#fff"/>
+            <ellipse cx="35" cy="50" rx="4.5" ry="5.5" fill="#222"/>
+            <ellipse cx="55" cy="50" rx="4.5" ry="5.5" fill="#222"/>
+            <ellipse cx="45" cy="65" rx="7" ry="4" fill="#222"/>
+            <ellipse cx="45" cy="67" rx="3.5" ry="2" fill="#fff"/>
+            <ellipse cx="38" cy="48" rx="1.2" ry="2" fill="#fff"/>
+            <ellipse cx="52" cy="48" rx="1.2" ry="2" fill="#fff"/>
+        </svg>
+    </div>
+    <div id="qrInfo" style="display:block; margin-bottom:32px;">
+        <h1 id="definisi">Definisi QR Code</h1>
+        <p>QR Code (Quick Response Code) adalah kode matriks atau kode dua dimensi yang dapat menyimpan data dalam bentuk teks, tautan (URL), nomor telepon, alamat email, hingga informasi lainnya. QR Code bisa dipindai menggunakan kamera smartphone atau scanner khusus, sehingga memudahkan pengguna untuk mengakses informasi dengan cepat.</p>
+
+        <h2 id="kegunaan">Kegunaan QR Code</h2>
+        <p>QR Code banyak digunakan di berbagai bidang, antara lain:</p>
+        <ul>
+            <li>Pembayaran digital (QRIS, OVO, GoPay, Dana, dll.)</li>
+            <li>Akses cepat ke website tanpa mengetik URL panjang.</li>
+            <li>Media promosi: menyimpan link katalog, brosur digital, atau sosial media.</li>
+            <li>Penyimpanan data kontak: seperti nomor HP, alamat email, kartu nama digital.</li>
+            <li>Absensi / presensi digital di sekolah, kampus, atau kantor.</li>
+            <li>Tiket elektronik: konser, transportasi, bioskop, dll.</li>
+            <li>Keamanan dan autentikasi (login cepat, verifikasi).</li>
+        </ul>
+
+        <h2 id="jenis">Jenis-jenis QR Code</h2>
+        <p>Secara umum, ada 2 kategori utama:</p>
+        <ul>
+            <li><b>Static QR Code</b><br>Informasi yang tersimpan permanen dan tidak bisa diubah setelah dibuat.<br>Contoh: link ke website tetap, nomor telepon.</li>
+            <li><b>Dynamic QR Code</b><br>Data di dalamnya bisa diubah meskipun QR Code sudah dicetak atau dibagikan.<br>Biasanya digunakan untuk bisnis karena lebih fleksibel.<br>Contoh: link promosi yang bisa diperbarui.</li>
+        </ul>
+        <p>Berdasarkan isinya, QR Code bisa berisi:</p>
+        <ul>
+            <li>URL (tautan web)</li>
+            <li>Teks</li>
+            <li>Nomor telepon</li>
+            <li>Email</li>
+            <li>Lokasi (maps)</li>
+            <li>Wi-Fi (SSID & password)</li>
+            <li>VCard (kontak digital)</li>
+        </ul>
+
+        <h2 id="cara">Cara Membuat QR Code</h2>
+        <p>Ada dua cara utama:</p>
+        <h3 id="webgen">a. Melalui Website Generator</h3>
+        <ol>
+            <li>Buka website pembuat QR Code (misalnya: <a href="https://qr-code-generator.com" target="_blank">qr-code-generator.com</a>, <a href="https://qr-code-monkey.com" target="_blank">qr-code-monkey.com</a>, atau <a href="https://qrgenerator.org" target="_blank">qrgenerator.org</a>).</li>
+            <li>Pilih jenis data (URL, teks, nomor telepon, email, dll.).</li>
+            <li>Masukkan data yang ingin disimpan.</li>
+            <li>Klik tombol Generate / Create QR Code.</li>
+            <li>Unduh QR Code (format PNG/JPG/SVG) dan gunakan sesuai kebutuhan.</li>
+        </ol>
+        <h3 id="aplikasi">b. Menggunakan Aplikasi / Software</h3>
+        <ul>
+            <li>Smartphone: banyak aplikasi pembuat QR di Play Store / App Store.</li>
+            <li>Microsoft Word / Excel / PowerPoint: ada add-ins yang bisa membuat QR Code.</li>
+            <li>Canva: bisa membuat QR Code untuk desain promosi.</li>
+            <li>Google Chrome: klik kanan halaman → “Create QR Code for this page”.</li>
+        </ul>
+    </div>
+    <script>
+function showInfoAndScroll(id) {
+    var el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+</script>
+</body>
+</html>
